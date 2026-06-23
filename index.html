@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Resource Library · Georgetown Day School</title>
+<meta name="description" content="The Georgetown Day School AI Explorers faculty resource library: vetted, plain-language resources on AI in K-12 and independent school education.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest-900:#0B4D33; --forest-800:#13603F; --forest-700:#1E7A52;
+  --canopy:#6DBE45; --moss:#95A76D; --river:#4F7A93; --clay:#B36D49;
+  --stone-100:#F7F6F3; --stone-200:#ECE9E2; --stone-300:#D8D4CC;
+  --charcoal-800:#24282B; --charcoal-900:#17191B; --white:#FFFFFF;
+  --ink:#1B201C; --muted:#5C655B;
+  --display:"Libre Caslon Text",Georgia,serif;
+  --ui:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;
+  --maxw:1240px; --r:18px;
+  --shadow:0 1px 2px rgba(11,77,51,.04),0 12px 28px rgba(11,77,51,.09);
+  --shadow-lg:0 14px 44px rgba(11,77,51,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--ui);background:var(--stone-100);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+:focus-visible{outline:3px solid var(--river);outline-offset:2px;border-radius:6px;}
+h3{font-family:var(--display);font-weight:400;line-height:1.12;letter-spacing:-.01em;}
+.eyebrow{font-family:var(--ui);font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+.skip{position:absolute;left:-9999px;top:0;background:var(--forest-900);color:#fff;padding:10px 16px;z-index:100;}
+.skip:focus{left:0;}
+
+/* ---------- APP BAR ---------- */
+.appbar{position:sticky;top:0;z-index:40;background:var(--forest-900);color:var(--white);box-shadow:0 2px 14px rgba(11,77,51,.18);}
+.appbar .ringtex{position:absolute;right:-60px;top:-92px;width:220px;height:220px;opacity:.16;pointer-events:none;}
+.appbar .row{position:relative;display:flex;align-items:center;gap:18px;height:66px;}
+.brand{display:flex;align-items:center;gap:10px;flex:none;}
+.brand .gds{font-family:var(--display);font-size:1.45rem;font-weight:700;line-height:1;color:var(--white);}
+.brand .rule{width:1px;height:26px;background:rgba(255,255,255,.28);}
+.brand .title{font-size:.92rem;font-weight:600;color:rgba(255,255,255,.92);}
+.appsearch{flex:1;max-width:600px;margin:0 auto;position:relative;}
+.appsearch svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:var(--muted);pointer-events:none;}
+.appsearch input{width:100%;height:42px;border-radius:24px;border:none;padding:0 16px 0 42px;font-size:.95rem;background:var(--white);color:var(--ink);}
+.appsearch input::placeholder{color:var(--muted);}
+.appsearch kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-family:inherit;font-size:.66rem;font-weight:700;color:var(--muted);border:1px solid var(--stone-300);border-radius:5px;padding:1px 6px;background:var(--stone-100);pointer-events:none;}
+.apptools{flex:none;display:flex;align-items:center;gap:8px;}
+.apptools button{position:relative;height:38px;min-width:38px;padding:0 10px;border-radius:24px;border:1px solid rgba(255,255,255,.32);background:transparent;color:var(--white);display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:.2s;font-size:.82rem;font-weight:600;}
+.apptools button:hover{background:rgba(255,255,255,.12);}
+.apptools button[aria-pressed="true"]{background:var(--canopy);color:var(--forest-900);border-color:var(--canopy);}
+.apptools svg{width:17px;height:17px;}
+.apptools .savedN{font-weight:700;}
+@media(max-width:760px){.brand .title,.brand .rule{display:none;}.appsearch kbd{display:none;}}
+
+/* ---------- FILTER BAR ---------- */
+.filterbar{position:sticky;top:66px;z-index:30;background:color-mix(in srgb,var(--stone-100) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--stone-300);}
+.filterbar .row{display:flex;align-items:center;gap:10px;padding:12px 0;flex-wrap:wrap;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.chip{font-size:.82rem;font-weight:600;padding:7px 14px;border-radius:30px;border:1px solid var(--stone-300);background:var(--white);color:var(--ink);transition:.16s;display:inline-flex;align-items:center;gap:7px;}
+.chip:hover{border-color:var(--forest-700);}
+.chip .n{font-size:.7rem;color:var(--muted);font-weight:700;}
+.chip[aria-pressed="true"]{background:var(--forest-800);border-color:var(--forest-800);color:var(--white);}
+.chip[aria-pressed="true"] .n{color:rgba(255,255,255,.78);}
+.optoggle{display:inline-flex;border:1px solid var(--stone-300);border-radius:20px;overflow:hidden;margin-left:2px;}
+.optoggle button{padding:5px 11px;font-size:.7rem;font-weight:700;background:var(--white);border:none;color:var(--muted);}
+.optoggle button[aria-pressed="true"]{background:var(--river);color:#fff;}
+.fb-spacer{flex:1;min-width:8px;}
+.fb-right{display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.status{display:flex;align-items:center;gap:7px;font-size:.8rem;color:var(--muted);white-space:nowrap;}
+.status .dot{width:8px;height:8px;border-radius:50%;background:var(--moss);}
+.status .dot.live{background:var(--canopy);}
+.status .dot.offline{background:var(--clay);}
+.clearbtn{background:none;border:none;color:var(--river);font-size:.8rem;font-weight:700;text-decoration:underline;}
+
+/* format popover */
+.popwrap{position:relative;}
+.popbtn{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;font-weight:600;padding:7px 13px;border-radius:24px;border:1px solid var(--stone-300);background:var(--white);color:var(--ink);}
+.popbtn[aria-expanded="true"]{border-color:var(--forest-700);}
+.popbtn .badge-n{background:var(--forest-800);color:#fff;border-radius:12px;font-size:.66rem;font-weight:700;padding:1px 7px;}
+.popbtn svg{width:14px;height:14px;}
+.popover{position:absolute;right:0;top:calc(100% + 8px);background:var(--white);border:1px solid var(--stone-300);border-radius:14px;box-shadow:var(--shadow-lg);padding:8px;min-width:210px;z-index:35;display:none;}
+.popover[data-open="true"]{display:block;}
+.popover .opt{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;font-size:.86rem;width:100%;background:none;border:none;color:var(--ink);text-align:left;}
+.popover .opt:hover{background:var(--stone-100);}
+.popover .opt .box{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--stone-300);display:inline-flex;align-items:center;justify-content:center;flex:none;}
+.popover .opt[aria-checked="true"] .box{background:var(--forest-800);border-color:var(--forest-800);color:#fff;}
+.popover .opt .box svg{width:12px;height:12px;}
+.popover .opt .n{margin-left:auto;font-size:.72rem;color:var(--muted);}
+
+.densi{display:inline-flex;border:1px solid var(--stone-300);border-radius:24px;overflow:hidden;background:var(--white);}
+.densi button{width:38px;height:34px;border:none;background:transparent;color:var(--muted);display:inline-flex;align-items:center;justify-content:center;}
+.densi button[aria-pressed="true"]{background:var(--forest-800);color:#fff;}
+.densi svg{width:16px;height:16px;}
+
+/* ---------- MAIN ---------- */
+main{padding:22px 0 10px;}
+.empty{text-align:center;padding:64px 20px;color:var(--muted);}
+.empty .big{font-family:var(--display);font-size:1.5rem;color:var(--ink);margin-bottom:8px;}
+
+/* card grid */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;list-style:none;}
+@media(max-width:1080px){.grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:540px){.grid{grid-template-columns:1fr;}}
+.rcard{position:relative;background:var(--white);border:1px solid var(--stone-300);border-radius:var(--r);overflow:hidden;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column;}
+.rcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);}
+.tile{position:relative;height:84px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.tile .tex{position:absolute;inset:0;opacity:.85;}
+.tile .fmt-ico{position:relative;z-index:1;width:34px;height:34px;color:var(--white);}
+.star{position:absolute;top:8px;right:8px;z-index:3;width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,.85);color:var(--forest-800);display:inline-flex;align-items:center;justify-content:center;transition:.15s;}
+.star:hover{background:#fff;color:var(--clay);}
+.star svg{width:17px;height:17px;}
+.star[aria-pressed="true"]{color:var(--clay);}
+.star[aria-pressed="true"] svg{fill:var(--clay);}
+.rbody{padding:14px 16px 15px;display:flex;flex-direction:column;flex:1;}
+.reye{font-size:.62rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;margin-bottom:6px;}
+.rcard h3{font-size:1.02rem;color:var(--charcoal-900);margin-bottom:7px;}
+.rdesc{font-size:.83rem;color:var(--muted);flex:1;margin-bottom:11px;}
+.rfoot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--stone-200);padding-top:10px;}
+.open{font-size:.79rem;font-weight:700;color:var(--forest-700);display:inline-flex;align-items:center;gap:6px;}
+.open .arr{transition:transform .2s;}
+.rcard:hover .open .arr{transform:translateX(4px);}
+.open::after{content:"";position:absolute;inset:0;z-index:1;}
+.dom{font-size:.7rem;color:var(--moss);position:relative;z-index:0;}
+
+/* compact list view */
+.grid.list{display:flex;flex-direction:column;gap:7px;}
+.lrow{position:relative;display:flex;align-items:center;gap:14px;background:var(--white);border:1px solid var(--stone-300);border-radius:12px;padding:9px 14px;transition:.15s;}
+.lrow:hover{border-color:var(--forest-700);box-shadow:var(--shadow);}
+.lrow .ldot{width:34px;height:34px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;color:#fff;flex:none;}
+.lrow .ldot svg{width:18px;height:18px;}
+.lrow .ltitle{font-family:var(--display);font-size:1.02rem;color:var(--charcoal-900);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.lrow .ltitle::after{content:"";position:absolute;inset:0;z-index:1;}
+.lrow .lmeta{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);flex:none;}
+.lrow .ldom{font-size:.74rem;color:var(--moss);flex:none;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.lrow .star{position:relative;top:auto;right:auto;z-index:2;background:var(--stone-100);}
+@media(max-width:680px){.lrow .lmeta,.lrow .ldom{display:none;}}
+
+/* ---------- BROWSE BY TOPIC ---------- */
+.browse{padding:30px 0 8px;}
+.label-row{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap;}
+.label-row .eyebrow{color:var(--forest-700);}
+.label-row .note{font-size:.88rem;color:var(--muted);}
+.topic-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;list-style:none;}
+@media(max-width:1080px){.topic-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:560px){.topic-grid{grid-template-columns:repeat(2,1fr);}}
+.tcard{position:relative;background:var(--white);border:1px solid var(--stone-300);border-radius:var(--r);padding:16px;transition:transform .18s,box-shadow .18s;overflow:hidden;min-height:120px;display:flex;flex-direction:column;justify-content:space-between;width:100%;text-align:left;}
+.tcard:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--forest-700);}
+.tcard .motif{position:absolute;top:8px;right:8px;width:54px;height:54px;opacity:.9;}
+.tcard h3{font-size:1.04rem;color:var(--charcoal-900);position:relative;z-index:2;max-width:80%;}
+.tcard .cn{font-size:.74rem;color:var(--muted);position:relative;z-index:2;margin-top:4px;}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--forest-900);color:rgba(255,255,255,.86);position:relative;overflow:hidden;margin-top:18px;}
+footer .ringsf{position:absolute;right:-90px;bottom:-90px;width:320px;height:320px;opacity:.15;}
+footer .ftop{display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;padding:42px 0 26px;position:relative;z-index:2;}
+footer .fbrand{max-width:340px;}
+footer .fbrand .gds{font-family:var(--display);font-size:1.6rem;font-weight:700;color:var(--white);}
+footer .fbrand p{font-size:.85rem;color:rgba(255,255,255,.66);margin-top:9px;}
+footer .fcol h4{font-family:var(--ui);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--canopy);margin-bottom:11px;font-weight:700;}
+footer .fcol a{display:block;font-size:.86rem;color:rgba(255,255,255,.8);margin-bottom:8px;background:none;border:none;text-align:left;}
+footer .fcol a:hover{color:var(--canopy);}
+footer .fbot{border-top:1px solid rgba(255,255,255,.14);padding:14px 0 24px;font-size:.76rem;color:rgba(255,255,255,.55);position:relative;z-index:2;}
+
+/* ---------- COMMAND PALETTE ---------- */
+.palette-bg{position:fixed;inset:0;background:rgba(11,30,22,.5);backdrop-filter:blur(3px);z-index:60;display:none;align-items:flex-start;justify-content:center;padding-top:11vh;}
+.palette-bg[data-open="true"]{display:flex;}
+.palette{width:min(640px,92vw);background:var(--white);border:1px solid var(--stone-300);border-radius:16px;box-shadow:var(--shadow-lg);overflow:hidden;}
+.palette .pin{display:flex;align-items:center;gap:11px;padding:15px 18px;border-bottom:1px solid var(--stone-200);}
+.palette .pin svg{width:19px;height:19px;stroke:var(--muted);flex:none;}
+.palette input{flex:1;border:none;background:none;font-size:1.05rem;color:var(--ink);outline:none;}
+.palette .plist{max-height:52vh;overflow-y:auto;padding:6px;}
+.presult{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;color:var(--ink);cursor:pointer;}
+.presult[aria-selected="true"]{background:color-mix(in srgb,var(--canopy) 18%,transparent);}
+.presult .pdot{width:9px;height:9px;border-radius:50%;flex:none;}
+.presult .pt{font-weight:600;font-size:.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.presult .pf{margin-left:auto;font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;flex:none;}
+.palette .phint{padding:10px 16px;border-top:1px solid var(--stone-200);font-size:.72rem;color:var(--muted);display:flex;gap:16px;}
+.palette .phint b{color:var(--ink);font-weight:600;}
+</style>
+</head>
+<body>
+<a class="skip" href="#grid">Skip to resources</a>
+
+<!-- APP BAR -->
+<header class="appbar">
+  <svg class="ringtex" viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="#6DBE45" stroke-width="1"><circle cx="100" cy="100" r="40"/><circle cx="100" cy="100" r="64"/><circle cx="100" cy="100" r="88"/></g></svg>
+  <div class="wrap row">
+    <a class="brand" href="#top" aria-label="GDS AI Resource Library home">
+      <span class="gds">GDS</span>
+      <svg width="22" height="16" viewBox="0 0 40 28" aria-hidden="true"><use href="#hopper"/></svg>
+      <span class="rule"></span>
+      <span class="title">AI Resource Library</span>
+    </a>
+    <div class="appsearch">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <label class="sr-only" for="search">Search resources</label>
+      <input id="search" type="search" placeholder="Search resources, topics, formats…" autocomplete="off" aria-controls="grid">
+      <kbd>/</kbd>
+    </div>
+    <div class="apptools">
+      <button id="savedBtn" aria-pressed="false" aria-label="Show saved resources">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m12 17-5.8 3 1.1-6.5L2.6 8.9l6.5-.9L12 2l2.9 6 6.5.9-4.7 4.6 1.1 6.5z"/></svg>
+        <span class="savedN" id="savedN">0</span>
+      </button>
+      <button id="cmdBtn" aria-label="Quick search (Command or Control + K)" title="Quick search (⌘K)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0H5a2 2 0 0 1-2-2v-4m6 6h10a2 2 0 0 0 2-2v-4"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filterbar" id="top">
+  <div class="wrap row">
+    <div class="chips" id="topicChips" role="group" aria-label="Filter by topic"></div>
+    <span class="optoggle" id="opToggle" role="group" aria-label="Match any or all topics" hidden>
+      <button id="opAny" aria-pressed="true" title="Match any selected topic">Any</button>
+      <button id="opAll" aria-pressed="false" title="Match all selected topics">All</button>
+    </span>
+    <span class="fb-spacer"></span>
+    <div class="fb-right">
+      <div class="popwrap">
+        <button class="popbtn" id="fmtBtn" aria-expanded="false" aria-haspopup="true" aria-controls="fmtPop">
+          Format <span class="badge-n" id="fmtN" hidden>0</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="popover" id="fmtPop" data-open="false" role="menu" aria-label="Filter by format"></div>
+      </div>
+      <button class="clearbtn" id="clearBtn" hidden>Clear</button>
+      <div class="status"><span class="dot" id="srcDot" aria-hidden="true"></span><span id="statusText" aria-live="polite">— resources</span></div>
+      <div class="densi" role="group" aria-label="View density">
+        <button id="viewCard" aria-pressed="true" aria-label="Card view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+        <button id="viewList" aria-pressed="false" aria-label="Compact list view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="wrap">
+  <ul class="grid" id="grid" aria-label="Resource list"></ul>
+  <div class="empty" id="empty" hidden>
+    <div class="big">No matches</div>
+    <p>Try removing a filter or clearing your search.</p>
+  </div>
+
+  <section class="browse" aria-labelledby="browseLabel">
+    <div class="label-row">
+      <span class="eyebrow" id="browseLabel">Browse by topic</span>
+      <span class="note">Or jump straight to a category.</span>
+    </div>
+    <ul class="topic-grid" id="topicGrid"></ul>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <svg class="ringsf" viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="#6DBE45" stroke-width="1"><circle cx="100" cy="100" r="30"/><circle cx="100" cy="100" r="50"/><circle cx="100" cy="100" r="70"/><circle cx="100" cy="100" r="90"/></g></svg>
+  <div class="wrap ftop">
+    <div class="fbrand">
+      <span class="gds">GDS <svg width="22" height="16" viewBox="0 0 40 28" style="vertical-align:middle"><use href="#hopper"/></svg></span>
+      <p id="footMeta">The AI Explorers' faculty resource library. Maintained from one spreadsheet, fed live.</p>
+    </div>
+    <div class="fcol"><h4>Library</h4><a href="#top">All resources</a><button class="lnk" data-jump="browse">Browse by topic</button><button class="lnk" id="footSaved">Saved</button></div>
+    <div class="fcol"><h4>Topics</h4><div id="footTopics"></div></div>
+    <div class="fcol"><h4>About</h4><a href="#">How we vet</a><a href="#">Suggest a resource</a><a href="#">The AI Explorers</a></div>
+  </div>
+  <div class="wrap fbot">© 2026 Georgetown Day School · Washington, DC</div>
+</footer>
+
+<!-- COMMAND PALETTE -->
+<div class="palette-bg" id="paletteBg" data-open="false" role="dialog" aria-modal="true" aria-label="Quick search">
+  <div class="palette">
+    <div class="pin">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <label class="sr-only" for="paletteInput">Quick search resources</label>
+      <input id="paletteInput" type="text" placeholder="Jump to a resource…" autocomplete="off" role="combobox" aria-expanded="true" aria-controls="paletteList" aria-autocomplete="list">
+    </div>
+    <div class="plist" id="paletteList" role="listbox" aria-label="Results"></div>
+    <div class="phint"><span><b>↑↓</b> navigate</span><span><b>↵</b> open</span><span><b>esc</b> close</span></div>
+  </div>
+</div>
+
+<!-- SVG SYMBOLS -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="hopper" viewBox="0 0 40 28">
+    <path d="M16 17 L6 8 L11 19" fill="none" stroke="#0B4D33" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <ellipse cx="17" cy="15" rx="10" ry="3.4" fill="#6DBE45"/>
+    <path d="M10 14.5 Q 18 12.6 25 14.5" fill="none" stroke="#0B4D33" stroke-width="1" opacity=".6"/>
+    <path d="M18 18 l-2 5 M22 18 l1 5" stroke="#0B4D33" stroke-width="1.6" stroke-linecap="round"/>
+    <circle cx="27" cy="14" r="3.2" fill="#0B4D33"/><circle cx="28" cy="13.2" r=".8" fill="#fff"/>
+    <path d="M29 12 Q33 7 36 8 M29 13.4 Q34 11 37 12.4" fill="none" stroke="#0B4D33" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<script>
+/* =========================================================
+   GDS AI Resource Library · v2 (Curiosity in Motion)
+   Single file · live-CSV sync with baked offline fallback
+   ========================================================= */
+const CONFIG = {
+  SHEET_CSV_URL:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSwKCvImsuph_H74ObPk6fbg5Zl43g1iY8NZXsIFNKiRqJBaKD8KE1oSuakRL4Kq2kUGUmU6IVR9yt1/pub?gid=0&single=true&output=csv",
+  TOPIC_ORDER:["Pedagogy","AI Edu","Leadership","Professional Development","Student Development","Tools"]
+};
+const SEED = /*__SEED__*/[{"name": "AI Co-Lab", "url": "https://www.educolab.org/", "cats": ["Pedagogy", "AI Edu"], "desc": "“AI professional development for teachers, by teachers.” The AI Co-Lab is a group of teachers from across the US (co-founded by a Sidwell teacher) that meets monthly to do hands-on work, practice, and learning at the intersection of pedagogy and AI. It's a very teaching-focused group of true peers: hands-on, collaborative, and supportive. Novices, the curious, and experts are all welcome."}, {"name": "Five Ways to Design Assignments for the AI Era", "url": "https://upenn.us4.list-manage.com/track/click?u=bb43079a6be236dc96ceab172&id=f71b36a82c&e=61bd69c242", "cats": ["Pedagogy"], "desc": ""}, {"name": "AI and Professors & Students", "url": "https://youtu.be/rbCQKODKv1o?si=7V91emdcbOJ_cF-6", "cats": ["Pedagogy"], "desc": "10-minute PBS NewsHour clip about the intersection of AI and education, focused on higher ed."}, {"name": "The Last Invention", "url": "https://open.spotify.com/show/3JlvdUfyVkBoe9K1hiXWyI?si=4b702be20e5147bf", "cats": ["AI Edu"], "desc": "9-episode podcast about AI in general; awesome foundational knowledge, plus a framework for the different ways folks can orient themselves to AI."}, {"name": "Generative AI is Coming for our Students", "url": "https://www.brookings.edu/articles/generative-ai-is-coming-for-our-students-and-now-is-the-moment-to-shape-it/", "cats": ["Pedagogy"], "desc": "Brookings article."}, {"name": "Making AI Work for Schools", "url": "https://www.brookings.edu/articles/making-ai-work-for-schools/", "cats": ["Pedagogy", "Leadership"], "desc": "Brookings article."}, {"name": "Framework for AI Fluency", "url": "https://www-cdn.anthropic.com/334975cdec18f744b4fa511dc8518bd8d119d29d.pdf", "cats": ["Professional Development"], "desc": "From Anthropic: “The Four D's” for AI literacy."}, {"name": "Shell Game", "url": "https://open.spotify.com/show/7IddLasNvVGTKEDjq5bVhe?si=0348040531894247", "cats": ["AI Edu"], "desc": "Highly entertaining podcast that follows a journalist exploring the AI “agent” space. In season one he chronicles what happened when he created an AI agent of himself and eventually let it loose in the world. In season two he attempts to start a company staffed entirely by AI agents."}, {"name": "Julia's comically extensive and admirably thorough catalog of AI-related reading material", "url": "https://docs.google.com/document/d/1jlqKuvAOEbXEo3_5m_0edz-K5JUhn7rKBVKVcIf8T0Q/edit?usp=sharing", "cats": ["AI Edu", "Pedagogy"], "desc": "A compiled list of AI readings sorted into categories, ordered roughly by recommendation within each. No expectation to read everything; jump around to what interests you. Dates are included because, in a fast-moving field, they often matter."}, {"name": "Rashad's list of AI-related teaching resources", "url": "https://docs.google.com/document/d/1UK16DwBwTYOca8UAMIirjSN8BeHfOtLIAiADWpFwTUs/edit?usp=sharing", "cats": ["Pedagogy"], "desc": ""}, {"name": "WaPo: the downsides of “AI detectors”", "url": "https://www.washingtonpost.com/opinions/2026/04/13/ai-detectors-students/", "cats": ["Pedagogy"], "desc": ""}, {"name": "New Yorker: “What Will it Take to Get AI Out of Schools?”", "url": "https://drive.google.com/file/d/1L5UfUx9qSQzhDUYMuYbWQWRtTc0CwuhD/view?usp=drive_link", "cats": ["Pedagogy", "Student Development"], "desc": "Argues that the rapid, largely uncritical adoption of A.I. in schools risks undermining students' cognitive development, social growth, and the fundamental purpose of learning."}, {"name": "Student Guide to Generative AI from Anike", "url": "https://drive.google.com/file/d/1hmo6V_9Vmubv1QbtjU3IVz2DJmv2azWU/view?usp=sharing", "cats": ["Pedagogy"], "desc": ""}, {"name": "NYT: “How A.I. Killed Student Writing (and Revived It)”", "url": "https://www.nytimes.com/2026/04/30/us/ai-students-cheating-homework-classrooms.html?unlocked_article_code=1.gFA.Jxwr.GPQqSmhfPc7M&smid=url-share", "cats": [], "desc": "How widespread student use of AI for writing is pushing K-12 teachers to shift from take-home assignments to in-class, closely observed writing, to preserve authentic student thinking while still teaching responsible AI use."}, {"name": "OpenAI and Khan Academy", "url": "https://www.nytimes.com/2026/05/16/business/tyrangiel-ai-book-openai-khan-academy-khanmigo.html", "cats": [], "desc": "On how Khan Academy and OpenAI teamed up to create Khanmigo, and how to integrate AI into teaching and tutoring practices."}, {"name": "TeachAI: AI Guidance for Schools Toolkit", "url": "https://www.teachai.org/toolkit", "cats": ["Leadership"], "desc": "Free toolkit from Code.org, ISTE, and partners: a seven-principle framework, sample policies, and ready-to-adapt language for writing a school AI policy."}, {"name": "NAIS: AI Resources for Schools and Educators", "url": "https://www.nais.org/resource-center/resources/ai-resources-for-schools-and-educators/", "cats": ["Leadership"], "desc": "The NAIS running, independent-school-specific collection of AI articles, policies, and guidance. The closest thing to a peer-school reference shelf."}, {"name": "NAIS: 2024 Generative AI in Independent Schools Survey", "url": "https://www.nais.org/resource-center/resources/research/nais-research-2024-generative-ai-in-independent-schools-survey-report", "cats": ["Leadership"], "desc": "Survey data on what AI classroom policies independent schools are adopting and how they built them. Useful for benchmarking against peers."}, {"name": "An Uncertain Future: AI Resource Guide for Trustees", "url": "https://www.nais.org/resource-center/resources/an-uncertain-future-an-ai-resource-guide-for-independent-school-trustees", "cats": ["Leadership"], "desc": "NAIS/ATLIS/ISCA guide orienting board members to AI policy, risk, legal, and privacy questions. Good to hand to a committee."}, {"name": "ATLIS: AI Resources", "url": "https://theatlis.org/page/ai-resources", "cats": ["Leadership"], "desc": "The independent-school technology leaders' hub: sample AI policies, academic-honesty language, and decision frameworks from peer schools."}, {"name": "U.S. Dept. of Education: AI and the Future of Teaching and Learning", "url": "https://www.ed.gov/sites/ed/files/documents/ai-report/ai-report.pdf", "cats": ["Leadership"], "desc": "The 2023 federal report arguing AI should augment, not replace, teachers. The standard policy reference, with sections on bias and guardrails."}, {"name": "UNESCO: Guidance for Generative AI in Education", "url": "https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research", "cats": ["Leadership"], "desc": "UNESCO global guidance, including a proposed age floor for classroom AI use and eight policy measures. The international and ethics angle."}, {"name": "EDSAFE AI Alliance", "url": "https://www.edsafeai.org/", "cats": ["Leadership"], "desc": "A vendor-neutral coalition advancing the SAFE (Safe, Accountable, Fair, Effective) framework, plus a policy library for schools."}, {"name": "AI4K12: Five Big Ideas in AI", "url": "https://ai4k12.org/", "cats": ["AI Edu"], "desc": "The AAAI/CSTA national guidelines organizing K-12 AI learning into five big ideas across grade bands. The backbone many curricula build on."}, {"name": "Elements of AI (free course)", "url": "https://www.elementsofai.com/", "cats": ["AI Edu", "Professional Development"], "desc": "University of Helsinki free, no-math intro to what AI can and cannot do. A solid starting point for nervous beginners."}, {"name": "Day of AI (MIT RAISE)", "url": "https://dayofai.org/", "cats": ["AI Edu", "Pedagogy"], "desc": "Free, Creative Commons K-12 curriculum and teacher PD from MIT, in 30-to-60-minute blocks. Covers ethics, bias, and how machines learn."}, {"name": "Code.org: Learn About AI / How AI Works", "url": "https://code.org/ai", "cats": ["AI Edu"], "desc": "Free video series and grades 6-12 lessons on machine learning, generative models, and ethics. Short enough to drop into a class."}, {"name": "3Blue1Brown: Neural Networks", "url": "https://www.3blue1brown.com/topics/neural-networks", "cats": ["AI Edu"], "desc": "Grant Sanderson's animated series on how neural networks and transformers actually work. For teachers who want the real mechanics, visually."}, {"name": "aiEDU: The AI Education Project", "url": "https://www.aiedu.org/", "cats": ["AI Edu", "Student Development"], "desc": "Nonprofit with free, ready-to-run curriculum: a nine-week course, five-minute warm-ups, and student projects. Built for non-CS classrooms."}, {"name": "Sal Khan: How AI Could Save (Not Destroy) Education (TED)", "url": "https://www.ted.com/talks/sal_khan_how_ai_could_save_not_destroy_education", "cats": ["AI Edu"], "desc": "The widely-cited optimistic case for AI tutoring, framed around Bloom's 2-sigma problem. Fifteen minutes; a decent faculty-meeting opener."}, {"name": "Hard Fork (podcast)", "url": "https://podcasts.apple.com/us/podcast/hard-fork/id1528594034", "cats": ["AI Edu"], "desc": "NYT tech podcast with Kevin Roose and Casey Newton. Not education-specific, but a reliable plain-English read on where AI is heading."}, {"name": "Ethan Mollick: One Useful Thing", "url": "https://www.oneusefulthing.org/", "cats": ["AI Edu", "Professional Development"], "desc": "The Wharton professor's newsletter on practical AI use. Research-grounded, frequently updated, and quotable in PD sessions."}, {"name": "Edutopia: ChatGPT & Generative AI", "url": "https://www.edutopia.org/topic/chatgpt-generative-ai/", "cats": ["Pedagogy"], "desc": "Edutopia running hub of classroom-tested, teacher-written pieces on using and managing AI. Practical over theoretical."}, {"name": "Edutopia: Teaching Students to Use AI Responsibly", "url": "https://www.edutopia.org/article/teaching-students-use-ai-responsibly/", "cats": ["Pedagogy", "Student Development"], "desc": "One English teacher's case (and method) for teaching responsible use rather than banning. A concrete classroom model."}, {"name": "AI Pedagogy Project (Harvard metaLAB)", "url": "https://aipedagogy.org/", "cats": ["Pedagogy"], "desc": "A searchable, open collection of classroom assignments that get students thinking critically with and about AI. Filter by subject, tool, and skill."}, {"name": "AI for Education: Prompt Library", "url": "https://www.aiforeducation.io/prompt-library", "cats": ["Pedagogy", "Professional Development"], "desc": "100-plus free, editable teacher prompts sorted by task (assessment, communication, SEL, special needs). Works with any chatbot."}, {"name": "Cult of Pedagogy (podcast)", "url": "https://www.cultofpedagogy.com/pod/", "cats": ["Pedagogy"], "desc": "Jennifer Gonzalez's long-running, well-respected teaching podcast; episodes on AI, academic integrity, and classroom strategy."}, {"name": "Ditch That Textbook: AI in Education", "url": "https://ditchthattextbook.com/ai/", "cats": ["Pedagogy"], "desc": "Matt Miller's practical hub of strategies, activities, and tools you can use in class right away. Concrete and low-friction."}, {"name": "OpenAI: Teaching with AI", "url": "https://openai.com/index/teaching-with-ai/", "cats": ["Pedagogy"], "desc": "OpenAI teacher guide with sample prompts, how ChatGPT works, its limits, and a note on the unreliability of AI detectors. Vendor source; read accordingly."}, {"name": "Hechinger Report: The Future of AI in the Classroom", "url": "https://hechingerreport.org/proof-points-future-ai-classroom/", "cats": ["Pedagogy", "AI Edu"], "desc": "Nonprofit education journalism on what the evidence does and does not yet show about AI in schools."}, {"name": "Anthropic: AI Fluency: Framework & Foundations (course)", "url": "https://www.coursera.org/learn/ai-fluency-framework-foundations", "cats": ["Professional Development"], "desc": "Free Coursera course on the 4D framework (Delegation, Description, Discernment, Diligence). About three hours; pairs with the AI Fluency PDF we already have."}, {"name": "Code.org: AI 101 for Teachers", "url": "https://code.org/ai/pl/101", "cats": ["Professional Development"], "desc": "Free short PD video series (Code.org, ETS, ISTE, Khan) on AI basics, responsible use, and classroom tips. Subtitled in nine languages."}, {"name": "Common Sense: AI Basics for K-12 Teachers", "url": "https://www.commonsense.org/education/training/ai-basics-for-k-12-teachers", "cats": ["Professional Development"], "desc": "Free self-paced course on what generative AI is, how it works, and data-privacy and ethics considerations. Good first PD for a whole faculty."}, {"name": "ISTE+ASCD: Artificial Intelligence in Education", "url": "https://iste-ascd.org/ai", "cats": ["Professional Development", "Leadership"], "desc": "The largest provider of educator AI PD; hub for GenerationAI resources, courses, and the StretchAI coach."}, {"name": "Common Sense: AI Literacy Lessons (Grades 6-12)", "url": "https://www.commonsense.org/education/collections/ai-literacy-lessons-for-grades-6-12", "cats": ["Student Development", "Pedagogy"], "desc": "Free, mostly 20-minute lessons introducing AI and its social and ethical impacts. Grab-and-go."}, {"name": "MagicSchool AI", "url": "https://www.magicschool.ai/", "cats": ["Tools", "Pedagogy"], "desc": "Widely-used teacher platform with 80-plus tools for planning, assessment, differentiation, and communication. FERPA/COPPA compliant; free tier."}, {"name": "Brisk Teaching", "url": "https://www.briskteaching.com/", "cats": ["Tools", "Pedagogy"], "desc": "A Chrome extension that gives feedback, adjusts reading level, and builds materials inside Google Docs and Slides. Free tier; works where teachers already work."}, {"name": "Diffit", "url": "https://diffit.me/", "cats": ["Tools", "Pedagogy"], "desc": "Generates and re-levels reading passages, questions, and vocabulary for any topic or source. Strong for differentiation and multilingual learners."}, {"name": "SchoolAI", "url": "https://schoolai.com/", "cats": ["Tools", "Student Development"], "desc": "Teacher-controlled student Spaces plus a dashboard showing where each student is stuck. FERPA/COPPA compliant; built for whole-class use."}, {"name": "Curipod", "url": "https://curipod.com/", "cats": ["Tools", "Pedagogy"], "desc": "Teacher-led interactive lessons where students write, get real-time AI feedback, and revise in the same period. No student accounts."}, {"name": "Eduaide.ai", "url": "https://www.eduaide.ai/", "cats": ["Tools", "Pedagogy"], "desc": "Guided workflows (not blank prompt boxes) for lesson plans, assessments, graphic organizers, and standards-aligned materials. Free tier."}, {"name": "NotebookLM (Google)", "url": "https://notebooklm.google/", "cats": ["Tools", "Student Development"], "desc": "A grounded AI tool that answers only from sources you upload, with citations. Generates study guides, summaries, and audio overviews. Under-18 guardrails."}, {"name": "Khanmigo for Teachers", "url": "https://www.khanmigo.ai/teachers", "cats": ["Tools", "Pedagogy"], "desc": "Khan Academy's free, nonprofit AI assistant for lesson plans, rubrics, exit tickets, and first drafts. Designed by teachers."}, {"name": "MIT Media Lab: Your Brain on ChatGPT", "url": "https://www.media.mit.edu/projects/your-brain-on-chatgpt/overview/", "cats": ["Student Development", "AI Edu"], "desc": "The cognitive-debt study: EEG evidence that LLM-assisted essay writing lowered brain engagement. Preliminary and not peer-reviewed; useful for the overreliance conversation."}, {"name": "RAND: AI Use in Schools Is Increasing but Guidance Lags", "url": "https://www.rand.org/pubs/research_reports/RRA4180-1.html", "cats": ["Leadership"], "desc": "Nationally representative survey: AI use jumped while school guidance trailed badly. Hard numbers for leading rather than reacting."}, {"name": "RAND: More Students Use AI for Homework, and More Believe It Harms Critical Thinking", "url": "https://www.rand.org/pubs/research_reports/RRA4742-1.html", "cats": ["Student Development"], "desc": "Survey finding that student AI use and student worry about its effect on thinking are rising together. Worth bringing to students directly."}, {"name": "Pew Research: How Teens Use and View AI", "url": "https://www.pewresearch.org/internet/2026/02/24/how-teens-use-and-view-ai/", "cats": ["Student Development"], "desc": "2026 data on what teens actually do with AI for schoolwork and where they think the line is. Grounds the conversation in student reality."}, {"name": "Stanford HAI: 2025 AI Index, Education chapter", "url": "https://hai.stanford.edu/ai-index/2025-ai-index-report/education", "cats": ["AI Edu", "Leadership"], "desc": "The education chapter of Stanford's annual index: teacher readiness, policy gaps, and the still-thin causal evidence base. Citable and neutral."}, {"name": "ISTE: GenerationAI", "url": "https://iste.org/generationai/", "cats": ["Professional Development"], "desc": "Free, educator-built K-12 resources to build AI confidence in the classroom. Good for individual teachers."}, {"name": "Common Sense: Navigating AI in Schools", "url": "https://www.commonsense.org/education/ai-in-schools", "cats": ["Leadership", "Pedagogy"], "desc": "A practical landing page pulling together AI guidance, lessons, and family resources. Good to point a department chair to."}, {"name": "Khan Academy: AI for Education (free course)", "url": "https://www.khanacademy.org/college-careers-more/ai-for-education", "cats": ["Professional Development", "AI Edu"], "desc": "Free self-paced Khan course introducing AI concepts and classroom use; pairs with Khanmigo."}, {"name": "AI for Education: Weekly Educator Webinars", "url": "https://www.aiforeducation.io/webinars", "cats": ["Professional Development"], "desc": "A free, recurring live webinar series demystifying AI for teachers. Good for a standing PD slot."}, {"name": "Common Sense Media: AI Ratings & Family Guidance", "url": "https://www.commonsensemedia.org/ai", "cats": ["Student Development", "Leadership"], "desc": "Independent ratings of AI tools plus family-facing guidance. Useful when you need to talk to parents, not just teachers."}, {"name": "NAIS: AI Online Courses for Educators", "url": "https://www.nais.org/events/artificial-intelligence-courses-for-educators", "cats": ["Professional Development"], "desc": "Independent-school-specific asynchronous AI courses (NAIS plus Ed3) blending pedagogy with classroom tools. Tailored to our world."}, {"name": "Edutopia: 7 AI Tools That Help Teachers Work More Efficiently", "url": "https://www.edutopia.org/article/7-ai-tools-that-help-teachers-work-more-efficiently/", "cats": ["Tools", "Pedagogy"], "desc": "A vetted teacher's-eye roundup of time-saving AI tools, with the why and how for each."}]/*__SEED_END__*/;
+
+/* category accent colors + topic motif */
+const CAT_COLOR={Pedagogy:"#1E7A52","AI Edu":"#4F7A93",Leadership:"#0B4D33","Professional Development":"#95A76D","Student Development":"#B36D49",Tools:"#6DBE45",Uncategorized:"#5C655B"};
+const TOPIC_MOTIF={Pedagogy:"book","AI Edu":"network",Leadership:"root","Professional Development":"rings","Student Development":"canopy",Tools:"sun"};
+const FMT_ORDER=["Article","Guide","Course","Tool","Research","Policy","Podcast","Video","Doc","PDF"];
+
+const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+function domainOf(u){try{return new URL(u).hostname.replace(/^www\./,"");}catch(e){return "";}}
+function formatOf(d){
+  const u=(d.url||"").toLowerCase(), cats=(d.cats||[]).map(c=>c.toLowerCase());
+  if(cats.includes("tools")) return "Tool";
+  if(u.includes("spotify.com")||u.includes("podcasts.apple")||u.includes("/podcast")||u.includes("buzzsprout")) return "Podcast";
+  if(u.includes("youtube.com")||u.includes("youtu.be")||u.includes("ted.com/talks")||u.includes("vimeo.com")) return "Video";
+  if(u.includes("coursera.org")||u.includes("elementsofai")||u.includes("/training/")||u.includes("/courses")||u.includes("code.org/ai/pl")||u.includes("college-careers-more/ai-for-education")||u.includes("/webinars")) return "Course";
+  if(u.endsWith(".pdf")||u.includes("ai-report.pdf")) return "PDF";
+  if(u.includes("rand.org")||u.includes("pewresearch.org")||u.includes("hai.stanford.edu")||u.includes("media.mit.edu")||u.includes("/research/")||u.includes("survey")) return "Research";
+  if(u.includes("teachai.org")||u.includes("ed.gov")||u.includes("unesco.org")||u.includes("edsafeai.org")||u.includes("theatlis.org")||u.includes("ai4k12.org")||u.includes("/toolkit")) return "Policy";
+  if(u.includes("docs.google.com/document")||u.includes("drive.google.com")) return "Doc";
+  if(u.includes("aipedagogy.org")||u.includes("dayofai.org")||u.includes("aiedu.org")||u.includes("nais.org")||u.includes("commonsense.org")||u.includes("iste")) return "Guide";
+  return "Article";
+}
+
+/* ---------- CSV parsing ---------- */
+function parseCSV(text){
+  const rows=[];let row=[],f="",q=false,i=0;
+  while(i<text.length){const c=text[i];
+    if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}
+    else{if(c==='"')q=true;else if(c===','){row.push(f);f="";}else if(c==='\n'){row.push(f);rows.push(row);row=[];f="";}else if(c==='\r'){}else f+=c;}
+    i++;}
+  if(f.length||row.length){row.push(f);rows.push(row);}
+  return rows.filter(r=>r.some(x=>x.trim()!==""));
+}
+const COLS={name:["resource","name","title"],url:["url","link"],cat:["category","categories","tags"],desc:["desc","description","notes","note"]};
+function rowsToData(rows){
+  if(!rows.length)return[];
+  const head=rows[0].map(h=>h.trim().toLowerCase());
+  const idx=ks=>{for(const k of ks){const j=head.indexOf(k);if(j>=0)return j;}return -1;};
+  const iN=idx(COLS.name),iU=idx(COLS.url),iC=idx(COLS.cat),iD=idx(COLS.desc);
+  if(iN<0||iU<0)return[];
+  return rows.slice(1).map(r=>({name:(r[iN]||"").trim(),url:(r[iU]||"").trim(),
+    cats:((r[iC]||"").split(/[\n,]+/).map(s=>s.trim()).filter(Boolean)),desc:(r[iD]||"").trim()}))
+    .filter(d=>d.name&&d.url);
+}
+
+/* ---------- state ---------- */
+let DATA=[], TOPIC=new Set(), FORMAT=new Set(), OP="any", QUERY="", VIEW="all", DENSITY="card";
+let FAVS=load("gds_ai_favs",[]);
+const norm=d=>({...d,cats:(d.cats||[]),fmt:formatOf(d),domain:domainOf(d.url),blob:(d.name+" "+(d.cats||[]).join(" ")+" "+d.desc).toLowerCase()});
+function load(k,f){try{return new Set(JSON.parse(localStorage.getItem(k)||JSON.stringify(f)));}catch(e){return new Set(f);}}
+function saveFavs(){try{localStorage.setItem("gds_ai_favs",JSON.stringify([...FAVS]));}catch(e){}}
+
+/* ---------- boot ---------- */
+hydrate(SEED.map(norm),false);
+readHash();
+render();
+fetchLive();
+
+function hydrate(data,live){
+  DATA=data;
+  const dot=document.getElementById("srcDot");
+  dot.className="dot "+(live?"live":"offline");
+  document.getElementById("footMeta").textContent =
+    "The AI Explorers' faculty resource library. "+DATA.length+" resources, "+
+    (live?"synced live from the spreadsheet.":"showing the offline copy.");
+  buildTopicChips(); buildFormatPop(); buildBrowse(); buildFootTopics();
+}
+async function fetchLive(){
+  try{
+    const res=await fetch(CONFIG.SHEET_CSV_URL,{cache:"no-store"});
+    if(!res.ok)throw 0;
+    const data=rowsToData(parseCSV(await res.text())).map(norm);
+    if(data.length){hydrate(data,true);render();}
+  }catch(e){/* keep baked fallback */}
+}
+
+/* ---------- topic chips ---------- */
+function topicCounts(){const c={};DATA.forEach(d=>d.cats.forEach(t=>c[t]=(c[t]||0)+1));return c;}
+function orderedTopics(){
+  const c=topicCounts();
+  const known=CONFIG.TOPIC_ORDER.filter(t=>c[t]);
+  const extra=Object.keys(c).filter(t=>!CONFIG.TOPIC_ORDER.includes(t)).sort();
+  return known.concat(extra);
+}
+function buildTopicChips(){
+  const c=topicCounts(), el=document.getElementById("topicChips"); el.innerHTML="";
+  el.appendChild(chip("All",DATA.length,TOPIC.size===0,()=>{TOPIC.clear();onFilter();}));
+  orderedTopics().forEach(t=>el.appendChild(chip(t,c[t],TOPIC.has(t),()=>{TOPIC.has(t)?TOPIC.delete(t):TOPIC.add(t);onFilter();})));
+  document.getElementById("opToggle").hidden = TOPIC.size<2;
+}
+function chip(label,n,active,onclick){
+  const b=document.createElement("button");
+  b.className="chip";b.type="button";b.setAttribute("aria-pressed",active?"true":"false");
+  b.innerHTML=`${esc(label)} <span class="n">${n}</span>`;b.onclick=onclick;return b;
+}
+
+/* ---------- format popover ---------- */
+function fmtCounts(){const c={};DATA.forEach(d=>c[d.fmt]=(c[d.fmt]||0)+1);return c;}
+function buildFormatPop(){
+  const c=fmtCounts(), pop=document.getElementById("fmtPop"); pop.innerHTML="";
+  const fmts=Object.keys(c).sort((a,b)=>{const ia=FMT_ORDER.indexOf(a),ib=FMT_ORDER.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib);});
+  fmts.forEach(f=>{
+    const b=document.createElement("button");
+    b.className="opt";b.type="button";b.setAttribute("role","menuitemcheckbox");
+    b.setAttribute("aria-checked",FORMAT.has(f)?"true":"false");
+    b.innerHTML=`<span class="box">${FORMAT.has(f)?'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 12l4 4L19 7"/></svg>':''}</span>${esc(f)}<span class="n">${c[f]}</span>`;
+    b.onclick=()=>{FORMAT.has(f)?FORMAT.delete(f):FORMAT.add(f);buildFormatPop();onFilter();};
+    pop.appendChild(b);
+  });
+  const n=document.getElementById("fmtN");
+  n.hidden=FORMAT.size===0; n.textContent=FORMAT.size;
+}
+
+/* ---------- browse-by-topic cards ---------- */
+function buildBrowse(){
+  const c=topicCounts(), el=document.getElementById("topicGrid"); el.innerHTML="";
+  orderedTopics().forEach(t=>{
+    const li=document.createElement("li");
+    const col=CAT_COLOR[t]||"#5C655B";
+    const b=document.createElement("button"); b.className="tcard"; b.type="button";
+    b.innerHTML=`<div class="motif">${motif(TOPIC_MOTIF[t]||"rings",col)}</div><h3>${esc(t)}</h3><div class="cn">${c[t]} resource${c[t]===1?"":"s"}</div>`;
+    b.onclick=()=>{TOPIC=new Set([t]);VIEW="all";onFilter();window.scrollTo({top:0,behavior:"smooth"});};
+    li.appendChild(b); el.appendChild(li);
+  });
+}
+function buildFootTopics(){
+  const el=document.getElementById("footTopics"); el.innerHTML="";
+  orderedTopics().forEach(t=>{
+    const a=document.createElement("button"); a.className="lnk"; a.textContent=t;
+    a.onclick=()=>{TOPIC=new Set([t]);VIEW="all";onFilter();window.scrollTo({top:0,behavior:"smooth"});};
+    el.appendChild(a);
+  });
+}
+
+/* ---------- filter + render ---------- */
+function matches(d){
+  if(VIEW==="saved" && !FAVS.has(d.url)) return false;
+  if(QUERY && !d.blob.includes(QUERY)) return false;
+  if(FORMAT.size && !FORMAT.has(d.fmt)) return false;
+  if(TOPIC.size){
+    const ts=[...TOPIC];
+    const ok = OP==="all" ? ts.every(t=>d.cats.includes(t)) : ts.some(t=>d.cats.includes(t));
+    if(!ok) return false;
+  }
+  return true;
+}
+function onFilter(){ writeHash(); buildTopicChips(); buildFormatPop(); render(); if(typeof syncOp==="function") syncOp(); }
+function render(){
+  const list=DATA.filter(matches);
+  const grid=document.getElementById("grid");
+  grid.className="grid"+(DENSITY==="list"?" list":"");
+  grid.innerHTML="";
+  list.forEach(d=>grid.appendChild(DENSITY==="list"?rowEl(d):cardEl(d)));
+  document.getElementById("empty").hidden=list.length>0;
+  const total=DATA.length;
+  document.getElementById("statusText").textContent =
+    (list.length===total?total:list.length+" of "+total)+" resource"+(list.length===1?"":"s")+(VIEW==="saved"?" saved":"");
+  document.getElementById("savedN").textContent=FAVS.size;
+  document.getElementById("savedBtn").setAttribute("aria-pressed",VIEW==="saved");
+  document.getElementById("clearBtn").hidden=!(TOPIC.size||FORMAT.size||QUERY);
+  document.getElementById("viewCard").setAttribute("aria-pressed",DENSITY==="card");
+  document.getElementById("viewList").setAttribute("aria-pressed",DENSITY==="list");
+}
+function starBtn(d){
+  const fav=FAVS.has(d.url);
+  return `<button class="star" type="button" aria-pressed="${fav}" aria-label="${fav?"Remove from":"Save to"} saved: ${esc(d.name)}">
+    <svg viewBox="0 0 24 24" fill="${fav?"currentColor":"none"}" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m12 17-5.8 3 1.1-6.5L2.6 8.9l6.5-.9L12 2l2.9 6 6.5.9-4.7 4.6 1.1 6.5z"/></svg></button>`;
+}
+function cardEl(d){
+  const li=document.createElement("li"); li.className="rcard";
+  const col=CAT_COLOR[d.cats[0]]||"#1E7A52";
+  const desc=d.desc?`<p class="rdesc">${esc(d.desc)}</p>`:`<p class="rdesc" style="font-style:italic;opacity:.7">No description yet.</p>`;
+  li.innerHTML=`
+    <div class="tile" style="background:${col}">${tileTexture()}<span class="fmt-ico">${fmtIcon(d.fmt)}</span>${starBtn(d)}</div>
+    <div class="rbody">
+      <div class="reye" style="color:${col}">${d.cats.length?esc(d.cats.join(" · "))+" · ":""}${esc(d.fmt)}</div>
+      <h3>${esc(d.name)}</h3>
+      ${desc}
+      <div class="rfoot">
+        <a class="open" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">Open resource <span class="arr" aria-hidden="true">↗</span></a>
+        <span class="dom">${esc(d.domain)}</span>
+      </div>
+    </div>`;
+  wireStar(li,d);
+  return li;
+}
+function rowEl(d){
+  const li=document.createElement("li"); li.className="lrow";
+  const col=CAT_COLOR[d.cats[0]]||"#1E7A52";
+  li.innerHTML=`
+    <span class="ldot" style="background:${col}">${fmtIcon(d.fmt)}</span>
+    <a class="ltitle" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">${esc(d.name)}</a>
+    <span class="lmeta">${esc(d.fmt)}</span>
+    <span class="ldom">${esc(d.domain)}</span>
+    ${starBtn(d)}`;
+  wireStar(li,d);
+  return li;
+}
+function wireStar(el,d){
+  el.querySelector(".star").addEventListener("click",e=>{
+    e.preventDefault();e.stopPropagation();
+    FAVS.has(d.url)?FAVS.delete(d.url):FAVS.add(d.url);saveFavs();render();
+  });
+}
+
+/* ---------- URL hash (shareable views) ---------- */
+function writeHash(){
+  const p=new URLSearchParams();
+  if(QUERY)p.set("q",QUERY);
+  if(TOPIC.size)p.set("t",[...TOPIC].join("~"));
+  if(FORMAT.size)p.set("f",[...FORMAT].join("~"));
+  if(OP!=="any")p.set("op",OP);
+  if(VIEW!=="all")p.set("v",VIEW);
+  if(DENSITY!=="card")p.set("d",DENSITY);
+  const s=p.toString();
+  try{history.replaceState(null,"",s?("#"+s):location.pathname+location.search);}catch(e){try{location.hash=s;}catch(_){}}
+}
+function readHash(){
+  const p=new URLSearchParams(location.hash.replace(/^#/,""));
+  QUERY=(p.get("q")||"").toLowerCase(); if(QUERY)document.getElementById("search").value=QUERY;
+  (p.get("t")||"").split("~").filter(Boolean).forEach(x=>TOPIC.add(x));
+  (p.get("f")||"").split("~").filter(Boolean).forEach(x=>FORMAT.add(x));
+  OP=p.get("op")==="all"?"all":"any";
+  VIEW=p.get("v")==="saved"?"saved":"all";
+  DENSITY=p.get("d")==="list"?"list":"card";
+  document.getElementById("opAll").setAttribute("aria-pressed",OP==="all");
+  document.getElementById("opAny").setAttribute("aria-pressed",OP==="any");
+  buildTopicChips(); buildFormatPop();
+}
+
+/* ---------- events ---------- */
+const searchEl=document.getElementById("search");
+searchEl.addEventListener("input",()=>{QUERY=searchEl.value.trim().toLowerCase();writeHash();render();});
+document.getElementById("savedBtn").onclick=()=>{VIEW=VIEW==="saved"?"all":"saved";writeHash();render();};
+document.getElementById("footSaved").onclick=()=>{VIEW="saved";writeHash();render();window.scrollTo({top:0,behavior:"smooth"});};
+function syncOp(){document.getElementById("opAny").setAttribute("aria-pressed",OP==="any");document.getElementById("opAll").setAttribute("aria-pressed",OP==="all");}
+document.getElementById("opAny").onclick=()=>{OP="any";syncOp();onFilter();};
+document.getElementById("opAll").onclick=()=>{OP="all";syncOp();onFilter();};
+document.getElementById("clearBtn").onclick=()=>{TOPIC.clear();FORMAT.clear();QUERY="";searchEl.value="";VIEW="all";onFilter();};
+document.getElementById("viewCard").onclick=()=>{DENSITY="card";writeHash();render();};
+document.getElementById("viewList").onclick=()=>{DENSITY="list";writeHash();render();};
+[...document.querySelectorAll('[data-jump="browse"]')].forEach(b=>b.onclick=()=>document.querySelector(".browse").scrollIntoView({behavior:"smooth"}));
+
+/* format popover open/close */
+const fmtBtn=document.getElementById("fmtBtn"), fmtPop=document.getElementById("fmtPop");
+fmtBtn.onclick=e=>{
+  e.stopPropagation();
+  const willOpen=fmtPop.dataset.open!=="true";
+  fmtPop.dataset.open=willOpen?"true":"false";
+  fmtBtn.setAttribute("aria-expanded",willOpen?"true":"false");
+  if(willOpen){
+    fmtPop.style.left=""; fmtPop.style.right="0";
+    const pw=fmtPop.parentElement.getBoundingClientRect();
+    let r=fmtPop.getBoundingClientRect();
+    if(r.left<8){ /* would clip on the left -> flip to left-align under the button */
+      fmtPop.style.right="auto"; fmtPop.style.left="0";
+      r=fmtPop.getBoundingClientRect();
+      if(r.right>window.innerWidth-8){ /* now clips on the right -> clamp into viewport */
+        fmtPop.style.left=((window.innerWidth-8-r.width)-pw.left)+"px";
+      }
+    }
+  }
+};
+document.addEventListener("click",e=>{if(!e.target.closest(".popwrap")){fmtPop.dataset.open="false";fmtBtn.setAttribute("aria-expanded","false");}});
+
+/* ---------- command palette ---------- */
+const pbg=document.getElementById("paletteBg"),pInput=document.getElementById("paletteInput"),pList=document.getElementById("paletteList");
+let pSel=0,pItems=[];
+function openPalette(){pbg.dataset.open="true";pInput.value="";renderPalette("");pInput.focus();}
+function closePalette(){pbg.dataset.open="false";}
+function renderPalette(q){
+  q=q.toLowerCase();
+  pItems=DATA.filter(d=>!q||d.blob.includes(q)).slice(0,40);
+  pSel=0;pList.innerHTML="";
+  pItems.forEach((d,i)=>{
+    const a=document.createElement("a");a.className="presult";a.href=d.url;a.target="_blank";a.rel="noopener noreferrer";
+    a.setAttribute("role","option");a.setAttribute("aria-selected",i===0?"true":"false");
+    a.innerHTML=`<span class="pdot" style="background:${CAT_COLOR[d.cats[0]]||'#1E7A52'}"></span><span class="pt">${esc(d.name)}</span><span class="pf">${esc(d.fmt)}</span>`;
+    a.onmouseenter=()=>{pSel=i;markSel();};
+    pList.appendChild(a);
+  });
+}
+function markSel(){[...pList.children].forEach((el,i)=>el.setAttribute("aria-selected",i===pSel?"true":"false"));const c=pList.children[pSel];if(c)c.scrollIntoView({block:"nearest"});}
+pInput.addEventListener("input",()=>renderPalette(pInput.value));
+pbg.addEventListener("click",e=>{if(e.target===pbg)closePalette();});
+document.getElementById("cmdBtn").onclick=openPalette;
+document.addEventListener("keydown",e=>{
+  const inField=/^(input|textarea)$/i.test(document.activeElement.tagName);
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();openPalette();return;}
+  if(e.key==="/"&&!inField){e.preventDefault();searchEl.focus();return;}
+  if(pbg.dataset.open!=="true")return;
+  if(e.key==="Escape")closePalette();
+  else if(e.key==="ArrowDown"){e.preventDefault();pSel=Math.min(pSel+1,pItems.length-1);markSel();}
+  else if(e.key==="ArrowUp"){e.preventDefault();pSel=Math.max(pSel-1,0);markSel();}
+  else if(e.key==="Enter"){const c=pList.children[pSel];if(c){window.open(c.href,"_blank","noopener");closePalette();}}
+});
+
+/* ---------- abstract motif + icon generators ---------- */
+function motif(kind,color){
+  const s=p=>`<svg viewBox="0 0 100 100" fill="none" stroke="${color}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+  switch(kind){
+    case "book": return s(`<path d="M50 30 V82"/><path d="M50 34 C40 26 24 26 16 30 V74 C24 70 40 70 50 78"/><path d="M50 34 C60 26 76 26 84 30 V74 C76 70 60 70 50 78"/><path d="M50 30 C52 20 60 14 70 14" stroke-width="2"/><circle cx="70" cy="14" r="3" fill="${color}" stroke="none"/>`);
+    case "network": return s(`<circle cx="24" cy="30" r="5"/><circle cx="70" cy="20" r="5"/><circle cx="80" cy="62" r="5"/><circle cx="40" cy="74" r="5"/><circle cx="52" cy="46" r="6"/><path d="M28 32 L47 44 M65 23 L56 41 M76 60 L57 49 M44 70 L49 52"/>`);
+    case "root": return s(`<path d="M50 12 V44"/><path d="M50 44 C34 56 28 74 26 90 M50 44 C66 56 72 74 74 90 M50 44 C46 62 40 78 44 92 M50 44 C54 62 60 78 56 92"/><circle cx="50" cy="12" r="4"/>`);
+    case "rings": return s(`<circle cx="50" cy="50" r="10"/><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="44"/>`);
+    case "canopy": return s(`<circle cx="38" cy="44" r="18"/><circle cx="64" cy="40" r="14"/><circle cx="56" cy="62" r="16"/><path d="M50 62 V86" stroke-width="2.6"/>`);
+    case "sun": return s(`<circle cx="50" cy="50" r="13"/><path d="M50 18 V30 M50 70 V82 M18 50 H30 M70 50 H82 M28 28 L36 36 M72 28 L64 36 M28 72 L36 64 M72 72 L64 64"/>`);
+    default: return s(`<circle cx="50" cy="50" r="30"/>`);
+  }
+}
+function tileTexture(){return `<svg class="tex" viewBox="0 0 300 84" preserveAspectRatio="xMidYMid slice" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.4"><g>${[12,24,38,54,72,92].map(r=>`<circle cx="150" cy="42" r="${r}"/>`).join("")}</g></svg>`;}
+function fmtIcon(fmt){
+  const w='fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+  const m={
+    Article:`<svg viewBox="0 0 24 24" ${w}><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>`,
+    Guide:`<svg viewBox="0 0 24 24" ${w}><circle cx="12" cy="12" r="9"/><path d="m9 15 1.5-4.5L15 9l-1.5 4.5z"/></svg>`,
+    Course:`<svg viewBox="0 0 24 24" ${w}><path d="M3 8l9-4 9 4-9 4z"/><path d="M7 10v5c0 1 2.2 2.5 5 2.5s5-1.5 5-2.5v-5"/></svg>`,
+    Tool:`<svg viewBox="0 0 24 24" ${w}><path d="M14.5 5.5a3.5 3.5 0 0 0-4.9 4.4l-5.3 5.3 2.3 2.3 5.3-5.3a3.5 3.5 0 0 0 4.4-4.9l-2.2 2.2-1.8-1.8z"/></svg>`,
+    Research:`<svg viewBox="0 0 24 24" ${w}><circle cx="11" cy="11" r="6"/><path d="m20 20-4.3-4.3"/></svg>`,
+    Policy:`<svg viewBox="0 0 24 24" ${w}><path d="M12 3l7 3v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>`,
+    Podcast:`<svg viewBox="0 0 24 24" ${w}><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/></svg>`,
+    Video:`<svg viewBox="0 0 24 24" ${w}><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>`,
+    Doc:`<svg viewBox="0 0 24 24" ${w}><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M8 13h8M8 17h6"/></svg>`,
+    PDF:`<svg viewBox="0 0 24 24" ${w}><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>`
+  };
+  return m[fmt]||m.Article;
+}
+</script>
+</body>
+</html>
