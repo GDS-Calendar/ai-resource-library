@@ -125,6 +125,21 @@
   .charge .motto{font-family:'Lora',Georgia,serif;font-style:italic;font-size:15.5px;color:#3c3c3c;margin-bottom:8px;}
   .charge p{font-size:14.5px;color:var(--ink-soft);line-height:1.55;}
 
+  /* ===== Practice (tools + operations) ===== */
+  .practice-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:36px;align-items:stretch;}
+  .practice{border-radius:3px;padding:38px 34px;}
+  .practice.light{background:#fff;border:1px solid var(--rule);border-top:5px solid var(--gds-green);}
+  .practice.dark{background:var(--forest);color:#fff;}
+  .practice h3{font-size:22px;font-weight:800;line-height:1.25;margin-bottom:8px;color:var(--forest);}
+  .practice.dark h3{color:#fff;}
+  .practice .sub{font-family:'Lora',Georgia,serif;font-style:italic;font-size:16.5px;color:#41693f;margin-bottom:14px;}
+  .practice.dark .sub{color:#cfe4cf;}
+  .practice p{font-size:15.5px;color:var(--ink-soft);margin-bottom:12px;line-height:1.6;}
+  .practice.dark p{color:#e4efe4;}
+  .toolchips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 16px;}
+  .chip{background:var(--mist);border:1px solid #cfe0cf;color:var(--forest);font-weight:700;font-size:13.5px;padding:7px 14px;border-radius:999px;}
+  .practice.dark .chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;}
+
   /* ===== Divisions ===== */
   .divisions{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:36px;}
   .division{background:#fff;border:1px solid var(--rule);border-radius:3px;overflow:hidden;}
@@ -152,7 +167,7 @@
   footer.site a{color:#e6f2e6;}
 
   @media (max-width:960px){
-    .philosophy-grid,.duo,.research-grid,.charges{grid-template-columns:1fr;}
+    .philosophy-grid,.duo,.research-grid,.charges,.practice-grid{grid-template-columns:1fr;}
     .pillars,.divisions{grid-template-columns:1fr;}
     h1.page{font-size:38px;}
     nav.primary{display:none;}
@@ -383,8 +398,32 @@
   </div>
 </section>
 
+<!-- ===== AI in Practice ===== -->
+<section id="practice">
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center;">From the Classroom to the Business Office</p>
+    <h2 class="sect center">The Tools We Provide, and How We Use Them Ourselves</h2>
+    <p class="center-note">A philosophy is only as good as its implementation. Here is what we put in teachers' hands, and how the school holds its own operations to the standard we set for students: use AI where it multiplies human effort, never where it replaces human judgment.</p>
+    <div class="practice-grid">
+      <div class="practice light">
+        <h3>In the Classroom: One Platform, Chosen Deliberately</h3>
+        <p class="sub">Every GDS teacher receives a school-provided subscription to Google Gemini and NotebookLM.</p>
+        <p>We chose a primary platform on purpose. Gemini and NotebookLM operate under the school's enterprise controls, which means faculty and student data is governed by our agreements rather than by a consumer product's fine print. NotebookLM grounds its responses in the sources a teacher provides, which makes it unusually well suited to real learning. And because both are integrated across the Google Workspace tools GDS already runs on, AI assistance lives where the work already happens.</p>
+        <div class="toolchips"><span class="chip">Google Gemini</span><span class="chip">NotebookLM</span><span class="chip">Google Workspace</span></div>
+        <p>Where a role calls for something more specialized, additional AI tools are provisioned for faculty and staff as their work requires, each vetted through the same privacy and pedagogy review.</p>
+      </div>
+      <div class="practice dark">
+        <h3>Behind the Scenes: Efficiency in Service of the Program</h3>
+        <p class="sub">We hold our operations to the same standard we teach.</p>
+        <p>Beyond the classroom, GDS actively pursues AI to make the school itself run better: automating repetitive administrative tasks, streamlining workflows across departments, and using AI-assisted development to build custom tools and platforms where commercial solutions do not exist or do not fit our needs.</p>
+        <p>The point is not technology for its own sake. Every hour and dollar these efficiencies recover is redirected toward what families send their children here for in the first place: teaching, learning, and the program itself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== Divisions ===== -->
-<section id="divisions">
+<section class="band-mist" id="divisions">
   <div class="wrap">
     <p class="eyebrow" style="text-align:center;">Pre-K Through 12th Grade</p>
     <h2 class="sect center">A Developmental Approach, By Design</h2>
@@ -416,7 +455,7 @@
 </section>
 
 <!-- ===== FAQ ===== -->
-<section class="band-mist" id="faq">
+<section id="faq">
   <div class="wrap">
     <h2 class="sect center">Questions Families Ask</h2>
     <div class="faq">
