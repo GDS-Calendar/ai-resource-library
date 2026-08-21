@@ -183,6 +183,29 @@ footer .fbot{border-top:1px solid rgba(255,255,255,.14);padding:14px 0 24px;font
 .presult .pf{margin-left:auto;font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;flex:none;}
 .palette .phint{padding:10px 16px;border-top:1px solid var(--stone-200);font-size:.72rem;color:var(--muted);display:flex;gap:16px;}
 .palette .phint b{color:var(--ink);font-weight:600;}
+/* ---------- ANCHOR DOCS (pinned band) ---------- */
+.anchors{margin:30px 0 34px;}
+.anchors .label-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+.anchors .eyebrow{color:var(--forest-700);}
+.anchors .note{font-size:.84rem;color:var(--muted);}
+.anchor-grid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:900px){.anchor-grid{grid-template-columns:1fr;}}
+.acard{position:relative;display:flex;flex-direction:column;gap:9px;padding:22px 22px 20px;border-radius:var(--r);background:var(--forest-900);color:var(--white);overflow:hidden;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;}
+.acard .aring{position:absolute;right:-42px;top:-52px;width:150px;height:150px;opacity:.17;pointer-events:none;}
+.acard .atag{position:relative;font-family:var(--ui);font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--canopy);}
+.acard h3{position:relative;font-size:1.3rem;color:var(--white);}
+.acard .anote{position:relative;font-size:.86rem;line-height:1.5;color:rgba(255,255,255,.8);flex:1;}
+.acard .acta{position:relative;margin-top:6px;display:inline-flex;align-items:center;gap:7px;font-size:.83rem;font-weight:700;color:var(--canopy);}
+.acard .acta .arr{transition:transform .18s;}
+a.acard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+a.acard:hover .acta .arr{transform:translate(3px,-3px);}
+.acard.soon{background:var(--white);border:1px dashed var(--stone-300);box-shadow:none;}
+.acard.soon .atag{color:var(--forest-700);}
+.acard.soon h3{color:var(--ink);}
+.acard.soon .anote{color:var(--muted);}
+.acard.soon .acta{color:var(--muted);font-weight:600;}
+.acard.soon .aring g{stroke:var(--forest-700);}
+.acard.soon .aring{opacity:.09;}
 </style>
 </head>
 <body>
@@ -245,6 +268,15 @@ footer .fbot{border-top:1px solid rgba(255,255,255,.14);padding:14px 0 24px;font
 
 <!-- MAIN -->
 <main class="wrap">
+  <!-- ANCHOR DOCS (pinned) -->
+  <section class="anchors" id="anchorBand" aria-labelledby="anchorLabel">
+    <div class="label-row">
+      <span class="eyebrow" id="anchorLabel">Start here</span>
+      <span class="note">Our anchor documents. Everything else in the library sits underneath these.</span>
+    </div>
+    <ul class="anchor-grid" id="anchorGrid"></ul>
+  </section>
+
   <ul class="grid" id="grid" aria-label="Resource list"></ul>
   <div class="empty" id="empty" hidden>
     <div class="big">No matches</div>
@@ -309,6 +341,39 @@ const CONFIG = {
   SHEET_CSV_URL:"https://docs.google.com/spreadsheets/d/e/2PACX-1vSwKCvImsuph_H74ObPk6fbg5Zl43g1iY8NZXsIFNKiRqJBaKD8KE1oSuakRL4Kq2kUGUmU6IVR9yt1/pub?gid=0&single=true&output=csv",
   TOPIC_ORDER:["Pedagogy","AI Edu","Leadership","Professional Development","Student Development","Tools"]
 };
+
+/* =========================================================
+   ANCHOR DOCS  ·  the pinned band above the library grid
+   ---------------------------------------------------------
+   To turn a placeholder on: paste a URL into its "url" field.
+   Empty url = renders as a muted "Coming soon" card, not clickable.
+   "tag" is the small label; "note" is the one-line description.
+   ========================================================= */
+const ANCHORS = [
+  {
+    tag:"Guidebook",
+    title:"AI Usage Guidebook",
+    note:"How we think about AI in the classroom: the questions to ask before you use it, and what is off the table.",
+    /* TODO Tim: confirm this is the right version before you publish.
+       Trifold "AI USAGE GUIDEBOOK v1 2026 DRAFT" is what is wired up here. */
+    url:"https://drive.google.com/open?id=1ynRsxBu7Un8BnN2Y0TyWg0LJvz-RZK-Zm6VRxZrYIfA",
+    cta:"Read the guidebook"
+  },
+  {
+    tag:"Philosophy",
+    title:"AI Philosophy Statement",
+    note:"Where GDS stands on AI, and why. The statement that everything else here hangs from.",
+    url:"",
+    cta:"Read the statement"
+  },
+  {
+    tag:"Policy",
+    title:"AI Tools Usage Policy",
+    note:"Risk, privacy, and liability: when AI tools must not be used at GDS.",
+    url:"",
+    cta:"Read the policy"
+  }
+];
 const SEED = /*__SEED__*/[{"name": "AI Co-Lab", "url": "https://www.educolab.org/", "cats": ["Pedagogy", "AI Edu"], "desc": "“AI professional development for teachers, by teachers.” The AI Co-Lab is a group of teachers from across the US (co-founded by a Sidwell teacher) that meets monthly to do hands-on work, practice, and learning at the intersection of pedagogy and AI. It's a very teaching-focused group of true peers: hands-on, collaborative, and supportive. Novices, the curious, and experts are all welcome."}, {"name": "Five Ways to Design Assignments for the AI Era", "url": "https://upenn.us4.list-manage.com/track/click?u=bb43079a6be236dc96ceab172&id=f71b36a82c&e=61bd69c242", "cats": ["Pedagogy"], "desc": ""}, {"name": "AI and Professors & Students", "url": "https://youtu.be/rbCQKODKv1o?si=7V91emdcbOJ_cF-6", "cats": ["Pedagogy"], "desc": "10-minute PBS NewsHour clip about the intersection of AI and education, focused on higher ed."}, {"name": "The Last Invention", "url": "https://open.spotify.com/show/3JlvdUfyVkBoe9K1hiXWyI?si=4b702be20e5147bf", "cats": ["AI Edu"], "desc": "9-episode podcast about AI in general; awesome foundational knowledge, plus a framework for the different ways folks can orient themselves to AI."}, {"name": "Generative AI is Coming for our Students", "url": "https://www.brookings.edu/articles/generative-ai-is-coming-for-our-students-and-now-is-the-moment-to-shape-it/", "cats": ["Pedagogy"], "desc": "Brookings article."}, {"name": "Making AI Work for Schools", "url": "https://www.brookings.edu/articles/making-ai-work-for-schools/", "cats": ["Pedagogy", "Leadership"], "desc": "Brookings article."}, {"name": "Framework for AI Fluency", "url": "https://www-cdn.anthropic.com/334975cdec18f744b4fa511dc8518bd8d119d29d.pdf", "cats": ["Professional Development"], "desc": "From Anthropic: “The Four D's” for AI literacy."}, {"name": "Shell Game", "url": "https://open.spotify.com/show/7IddLasNvVGTKEDjq5bVhe?si=0348040531894247", "cats": ["AI Edu"], "desc": "Highly entertaining podcast that follows a journalist exploring the AI “agent” space. In season one he chronicles what happened when he created an AI agent of himself and eventually let it loose in the world. In season two he attempts to start a company staffed entirely by AI agents."}, {"name": "Julia's comically extensive and admirably thorough catalog of AI-related reading material", "url": "https://docs.google.com/document/d/1jlqKuvAOEbXEo3_5m_0edz-K5JUhn7rKBVKVcIf8T0Q/edit?usp=sharing", "cats": ["AI Edu", "Pedagogy"], "desc": "A compiled list of AI readings sorted into categories, ordered roughly by recommendation within each. No expectation to read everything; jump around to what interests you. Dates are included because, in a fast-moving field, they often matter."}, {"name": "Rashad's list of AI-related teaching resources", "url": "https://docs.google.com/document/d/1UK16DwBwTYOca8UAMIirjSN8BeHfOtLIAiADWpFwTUs/edit?usp=sharing", "cats": ["Pedagogy"], "desc": ""}, {"name": "WaPo: the downsides of “AI detectors”", "url": "https://www.washingtonpost.com/opinions/2026/04/13/ai-detectors-students/", "cats": ["Pedagogy"], "desc": ""}, {"name": "New Yorker: “What Will it Take to Get AI Out of Schools?”", "url": "https://drive.google.com/file/d/1L5UfUx9qSQzhDUYMuYbWQWRtTc0CwuhD/view?usp=drive_link", "cats": ["Pedagogy", "Student Development"], "desc": "Argues that the rapid, largely uncritical adoption of A.I. in schools risks undermining students' cognitive development, social growth, and the fundamental purpose of learning."}, {"name": "Student Guide to Generative AI from Anike", "url": "https://drive.google.com/file/d/1hmo6V_9Vmubv1QbtjU3IVz2DJmv2azWU/view?usp=sharing", "cats": ["Pedagogy"], "desc": ""}, {"name": "NYT: “How A.I. Killed Student Writing (and Revived It)”", "url": "https://www.nytimes.com/2026/04/30/us/ai-students-cheating-homework-classrooms.html?unlocked_article_code=1.gFA.Jxwr.GPQqSmhfPc7M&smid=url-share", "cats": [], "desc": "How widespread student use of AI for writing is pushing K-12 teachers to shift from take-home assignments to in-class, closely observed writing, to preserve authentic student thinking while still teaching responsible AI use."}, {"name": "OpenAI and Khan Academy", "url": "https://www.nytimes.com/2026/05/16/business/tyrangiel-ai-book-openai-khan-academy-khanmigo.html", "cats": [], "desc": "On how Khan Academy and OpenAI teamed up to create Khanmigo, and how to integrate AI into teaching and tutoring practices."}, {"name": "TeachAI: AI Guidance for Schools Toolkit", "url": "https://www.teachai.org/toolkit", "cats": ["Leadership"], "desc": "Free toolkit from Code.org, ISTE, and partners: a seven-principle framework, sample policies, and ready-to-adapt language for writing a school AI policy."}, {"name": "NAIS: AI Resources for Schools and Educators", "url": "https://www.nais.org/resource-center/resources/ai-resources-for-schools-and-educators/", "cats": ["Leadership"], "desc": "The NAIS running, independent-school-specific collection of AI articles, policies, and guidance. The closest thing to a peer-school reference shelf."}, {"name": "NAIS: 2024 Generative AI in Independent Schools Survey", "url": "https://www.nais.org/resource-center/resources/research/nais-research-2024-generative-ai-in-independent-schools-survey-report", "cats": ["Leadership"], "desc": "Survey data on what AI classroom policies independent schools are adopting and how they built them. Useful for benchmarking against peers."}, {"name": "An Uncertain Future: AI Resource Guide for Trustees", "url": "https://www.nais.org/resource-center/resources/an-uncertain-future-an-ai-resource-guide-for-independent-school-trustees", "cats": ["Leadership"], "desc": "NAIS/ATLIS/ISCA guide orienting board members to AI policy, risk, legal, and privacy questions. Good to hand to a committee."}, {"name": "ATLIS: AI Resources", "url": "https://theatlis.org/page/ai-resources", "cats": ["Leadership"], "desc": "The independent-school technology leaders' hub: sample AI policies, academic-honesty language, and decision frameworks from peer schools."}, {"name": "U.S. Dept. of Education: AI and the Future of Teaching and Learning", "url": "https://www.ed.gov/sites/ed/files/documents/ai-report/ai-report.pdf", "cats": ["Leadership"], "desc": "The 2023 federal report arguing AI should augment, not replace, teachers. The standard policy reference, with sections on bias and guardrails."}, {"name": "UNESCO: Guidance for Generative AI in Education", "url": "https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research", "cats": ["Leadership"], "desc": "UNESCO global guidance, including a proposed age floor for classroom AI use and eight policy measures. The international and ethics angle."}, {"name": "EDSAFE AI Alliance", "url": "https://www.edsafeai.org/", "cats": ["Leadership"], "desc": "A vendor-neutral coalition advancing the SAFE (Safe, Accountable, Fair, Effective) framework, plus a policy library for schools."}, {"name": "AI4K12: Five Big Ideas in AI", "url": "https://ai4k12.org/", "cats": ["AI Edu"], "desc": "The AAAI/CSTA national guidelines organizing K-12 AI learning into five big ideas across grade bands. The backbone many curricula build on."}, {"name": "Elements of AI (free course)", "url": "https://www.elementsofai.com/", "cats": ["AI Edu", "Professional Development"], "desc": "University of Helsinki free, no-math intro to what AI can and cannot do. A solid starting point for nervous beginners."}, {"name": "Day of AI (MIT RAISE)", "url": "https://dayofai.org/", "cats": ["AI Edu", "Pedagogy"], "desc": "Free, Creative Commons K-12 curriculum and teacher PD from MIT, in 30-to-60-minute blocks. Covers ethics, bias, and how machines learn."}, {"name": "Code.org: Learn About AI / How AI Works", "url": "https://code.org/ai", "cats": ["AI Edu"], "desc": "Free video series and grades 6-12 lessons on machine learning, generative models, and ethics. Short enough to drop into a class."}, {"name": "3Blue1Brown: Neural Networks", "url": "https://www.3blue1brown.com/topics/neural-networks", "cats": ["AI Edu"], "desc": "Grant Sanderson's animated series on how neural networks and transformers actually work. For teachers who want the real mechanics, visually."}, {"name": "aiEDU: The AI Education Project", "url": "https://www.aiedu.org/", "cats": ["AI Edu", "Student Development"], "desc": "Nonprofit with free, ready-to-run curriculum: a nine-week course, five-minute warm-ups, and student projects. Built for non-CS classrooms."}, {"name": "Sal Khan: How AI Could Save (Not Destroy) Education (TED)", "url": "https://www.ted.com/talks/sal_khan_how_ai_could_save_not_destroy_education", "cats": ["AI Edu"], "desc": "The widely-cited optimistic case for AI tutoring, framed around Bloom's 2-sigma problem. Fifteen minutes; a decent faculty-meeting opener."}, {"name": "Hard Fork (podcast)", "url": "https://podcasts.apple.com/us/podcast/hard-fork/id1528594034", "cats": ["AI Edu"], "desc": "NYT tech podcast with Kevin Roose and Casey Newton. Not education-specific, but a reliable plain-English read on where AI is heading."}, {"name": "Ethan Mollick: One Useful Thing", "url": "https://www.oneusefulthing.org/", "cats": ["AI Edu", "Professional Development"], "desc": "The Wharton professor's newsletter on practical AI use. Research-grounded, frequently updated, and quotable in PD sessions."}, {"name": "Edutopia: ChatGPT & Generative AI", "url": "https://www.edutopia.org/topic/chatgpt-generative-ai/", "cats": ["Pedagogy"], "desc": "Edutopia running hub of classroom-tested, teacher-written pieces on using and managing AI. Practical over theoretical."}, {"name": "Edutopia: Teaching Students to Use AI Responsibly", "url": "https://www.edutopia.org/article/teaching-students-use-ai-responsibly/", "cats": ["Pedagogy", "Student Development"], "desc": "One English teacher's case (and method) for teaching responsible use rather than banning. A concrete classroom model."}, {"name": "AI Pedagogy Project (Harvard metaLAB)", "url": "https://aipedagogy.org/", "cats": ["Pedagogy"], "desc": "A searchable, open collection of classroom assignments that get students thinking critically with and about AI. Filter by subject, tool, and skill."}, {"name": "AI for Education: Prompt Library", "url": "https://www.aiforeducation.io/prompt-library", "cats": ["Pedagogy", "Professional Development"], "desc": "100-plus free, editable teacher prompts sorted by task (assessment, communication, SEL, special needs). Works with any chatbot."}, {"name": "Cult of Pedagogy (podcast)", "url": "https://www.cultofpedagogy.com/pod/", "cats": ["Pedagogy"], "desc": "Jennifer Gonzalez's long-running, well-respected teaching podcast; episodes on AI, academic integrity, and classroom strategy."}, {"name": "Ditch That Textbook: AI in Education", "url": "https://ditchthattextbook.com/ai/", "cats": ["Pedagogy"], "desc": "Matt Miller's practical hub of strategies, activities, and tools you can use in class right away. Concrete and low-friction."}, {"name": "OpenAI: Teaching with AI", "url": "https://openai.com/index/teaching-with-ai/", "cats": ["Pedagogy"], "desc": "OpenAI teacher guide with sample prompts, how ChatGPT works, its limits, and a note on the unreliability of AI detectors. Vendor source; read accordingly."}, {"name": "Hechinger Report: The Future of AI in the Classroom", "url": "https://hechingerreport.org/proof-points-future-ai-classroom/", "cats": ["Pedagogy", "AI Edu"], "desc": "Nonprofit education journalism on what the evidence does and does not yet show about AI in schools."}, {"name": "Anthropic: AI Fluency: Framework & Foundations (course)", "url": "https://www.coursera.org/learn/ai-fluency-framework-foundations", "cats": ["Professional Development"], "desc": "Free Coursera course on the 4D framework (Delegation, Description, Discernment, Diligence). About three hours; pairs with the AI Fluency PDF we already have."}, {"name": "Code.org: AI 101 for Teachers", "url": "https://code.org/ai/pl/101", "cats": ["Professional Development"], "desc": "Free short PD video series (Code.org, ETS, ISTE, Khan) on AI basics, responsible use, and classroom tips. Subtitled in nine languages."}, {"name": "Common Sense: AI Basics for K-12 Teachers", "url": "https://www.commonsense.org/education/training/ai-basics-for-k-12-teachers", "cats": ["Professional Development"], "desc": "Free self-paced course on what generative AI is, how it works, and data-privacy and ethics considerations. Good first PD for a whole faculty."}, {"name": "ISTE+ASCD: Artificial Intelligence in Education", "url": "https://iste-ascd.org/ai", "cats": ["Professional Development", "Leadership"], "desc": "The largest provider of educator AI PD; hub for GenerationAI resources, courses, and the StretchAI coach."}, {"name": "Common Sense: AI Literacy Lessons (Grades 6-12)", "url": "https://www.commonsense.org/education/collections/ai-literacy-lessons-for-grades-6-12", "cats": ["Student Development", "Pedagogy"], "desc": "Free, mostly 20-minute lessons introducing AI and its social and ethical impacts. Grab-and-go."}, {"name": "MagicSchool AI", "url": "https://www.magicschool.ai/", "cats": ["Tools", "Pedagogy"], "desc": "Widely-used teacher platform with 80-plus tools for planning, assessment, differentiation, and communication. FERPA/COPPA compliant; free tier."}, {"name": "Brisk Teaching", "url": "https://www.briskteaching.com/", "cats": ["Tools", "Pedagogy"], "desc": "A Chrome extension that gives feedback, adjusts reading level, and builds materials inside Google Docs and Slides. Free tier; works where teachers already work."}, {"name": "Diffit", "url": "https://diffit.me/", "cats": ["Tools", "Pedagogy"], "desc": "Generates and re-levels reading passages, questions, and vocabulary for any topic or source. Strong for differentiation and multilingual learners."}, {"name": "SchoolAI", "url": "https://schoolai.com/", "cats": ["Tools", "Student Development"], "desc": "Teacher-controlled student Spaces plus a dashboard showing where each student is stuck. FERPA/COPPA compliant; built for whole-class use."}, {"name": "Curipod", "url": "https://curipod.com/", "cats": ["Tools", "Pedagogy"], "desc": "Teacher-led interactive lessons where students write, get real-time AI feedback, and revise in the same period. No student accounts."}, {"name": "Eduaide.ai", "url": "https://www.eduaide.ai/", "cats": ["Tools", "Pedagogy"], "desc": "Guided workflows (not blank prompt boxes) for lesson plans, assessments, graphic organizers, and standards-aligned materials. Free tier."}, {"name": "NotebookLM (Google)", "url": "https://notebooklm.google/", "cats": ["Tools", "Student Development"], "desc": "A grounded AI tool that answers only from sources you upload, with citations. Generates study guides, summaries, and audio overviews. Under-18 guardrails."}, {"name": "Khanmigo for Teachers", "url": "https://www.khanmigo.ai/teachers", "cats": ["Tools", "Pedagogy"], "desc": "Khan Academy's free, nonprofit AI assistant for lesson plans, rubrics, exit tickets, and first drafts. Designed by teachers."}, {"name": "MIT Media Lab: Your Brain on ChatGPT", "url": "https://www.media.mit.edu/projects/your-brain-on-chatgpt/overview/", "cats": ["Student Development", "AI Edu"], "desc": "The cognitive-debt study: EEG evidence that LLM-assisted essay writing lowered brain engagement. Preliminary and not peer-reviewed; useful for the overreliance conversation."}, {"name": "RAND: AI Use in Schools Is Increasing but Guidance Lags", "url": "https://www.rand.org/pubs/research_reports/RRA4180-1.html", "cats": ["Leadership"], "desc": "Nationally representative survey: AI use jumped while school guidance trailed badly. Hard numbers for leading rather than reacting."}, {"name": "RAND: More Students Use AI for Homework, and More Believe It Harms Critical Thinking", "url": "https://www.rand.org/pubs/research_reports/RRA4742-1.html", "cats": ["Student Development"], "desc": "Survey finding that student AI use and student worry about its effect on thinking are rising together. Worth bringing to students directly."}, {"name": "Pew Research: How Teens Use and View AI", "url": "https://www.pewresearch.org/internet/2026/02/24/how-teens-use-and-view-ai/", "cats": ["Student Development"], "desc": "2026 data on what teens actually do with AI for schoolwork and where they think the line is. Grounds the conversation in student reality."}, {"name": "Stanford HAI: 2025 AI Index, Education chapter", "url": "https://hai.stanford.edu/ai-index/2025-ai-index-report/education", "cats": ["AI Edu", "Leadership"], "desc": "The education chapter of Stanford's annual index: teacher readiness, policy gaps, and the still-thin causal evidence base. Citable and neutral."}, {"name": "ISTE: GenerationAI", "url": "https://iste.org/generationai/", "cats": ["Professional Development"], "desc": "Free, educator-built K-12 resources to build AI confidence in the classroom. Good for individual teachers."}, {"name": "Common Sense: Navigating AI in Schools", "url": "https://www.commonsense.org/education/ai-in-schools", "cats": ["Leadership", "Pedagogy"], "desc": "A practical landing page pulling together AI guidance, lessons, and family resources. Good to point a department chair to."}, {"name": "Khan Academy: AI for Education (free course)", "url": "https://www.khanacademy.org/college-careers-more/ai-for-education", "cats": ["Professional Development", "AI Edu"], "desc": "Free self-paced Khan course introducing AI concepts and classroom use; pairs with Khanmigo."}, {"name": "AI for Education: Weekly Educator Webinars", "url": "https://www.aiforeducation.io/webinars", "cats": ["Professional Development"], "desc": "A free, recurring live webinar series demystifying AI for teachers. Good for a standing PD slot."}, {"name": "Common Sense Media: AI Ratings & Family Guidance", "url": "https://www.commonsensemedia.org/ai", "cats": ["Student Development", "Leadership"], "desc": "Independent ratings of AI tools plus family-facing guidance. Useful when you need to talk to parents, not just teachers."}, {"name": "NAIS: AI Online Courses for Educators", "url": "https://www.nais.org/events/artificial-intelligence-courses-for-educators", "cats": ["Professional Development"], "desc": "Independent-school-specific asynchronous AI courses (NAIS plus Ed3) blending pedagogy with classroom tools. Tailored to our world."}, {"name": "Edutopia: 7 AI Tools That Help Teachers Work More Efficiently", "url": "https://www.edutopia.org/article/7-ai-tools-that-help-teachers-work-more-efficiently/", "cats": ["Tools", "Pedagogy"], "desc": "A vetted teacher's-eye roundup of time-saving AI tools, with the why and how for each."}]/*__SEED_END__*/;
 
 /* category accent colors + topic motif */
@@ -364,6 +429,7 @@ function saveFavs(){try{localStorage.setItem("gds_ai_favs",JSON.stringify([...FA
 /* ---------- boot ---------- */
 hydrate(SEED.map(norm),false);
 readHash();
+renderAnchors();
 render();
 fetchLive();
 
@@ -443,6 +509,31 @@ function buildFootTopics(){
   });
 }
 
+/* ---------- anchor docs (pinned band) ---------- */
+function aRing(){
+  return `<svg class="aring" viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="#6DBE45" stroke-width="1"><circle cx="100" cy="100" r="34"/><circle cx="100" cy="100" r="56"/><circle cx="100" cy="100" r="78"/><circle cx="100" cy="100" r="96"/></g></svg>`;
+}
+function renderAnchors(){
+  const el=document.getElementById("anchorGrid");
+  if(!el) return;
+  el.innerHTML="";
+  ANCHORS.forEach(a=>{
+    const li=document.createElement("li");
+    const live=!!(a.url||"").trim();
+    const inner=`${aRing()}
+      <span class="atag">${esc(a.tag)}</span>
+      <h3>${esc(a.title)}</h3>
+      <p class="anote">${esc(a.note)}</p>
+      <span class="acta">${live?esc(a.cta):"Coming soon"} <span class="arr" aria-hidden="true">${live?"↗":""}</span></span>`;
+    if(live){
+      li.innerHTML=`<a class="acard" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
+    }else{
+      li.innerHTML=`<div class="acard soon" aria-disabled="true">${inner}</div>`;
+    }
+    el.appendChild(li);
+  });
+}
+
 /* ---------- filter + render ---------- */
 function matches(d){
   if(VIEW==="saved" && !FAVS.has(d.url)) return false;
@@ -469,6 +560,9 @@ function render(){
   document.getElementById("savedN").textContent=FAVS.size;
   document.getElementById("savedBtn").setAttribute("aria-pressed",VIEW==="saved");
   document.getElementById("clearBtn").hidden=!(TOPIC.size||FORMAT.size||QUERY);
+  /* the pinned band is for the default view only; it steps aside once you start filtering */
+  const band=document.getElementById("anchorBand");
+  if(band) band.hidden=!!(TOPIC.size||FORMAT.size||QUERY||VIEW==="saved");
   document.getElementById("viewCard").setAttribute("aria-pressed",DENSITY==="card");
   document.getElementById("viewList").setAttribute("aria-pressed",DENSITY==="list");
 }
