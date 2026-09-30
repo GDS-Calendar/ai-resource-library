@@ -188,9 +188,10 @@ footer .fbot{border-top:1px solid rgba(255,255,255,.14);padding:14px 0 24px;font
 .anchors .label-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
 .anchors .eyebrow{color:var(--forest-700);}
 .anchors .note{font-size:.84rem;color:var(--muted);}
-.anchor-grid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.anchor-grid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch;}
+.anchor-grid>li{display:flex;}
 @media(max-width:900px){.anchor-grid{grid-template-columns:1fr;}}
-.acard{position:relative;display:flex;flex-direction:column;gap:9px;padding:22px 22px 20px;border-radius:var(--r);background:var(--forest-900);color:var(--white);overflow:hidden;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;}
+.acard{position:relative;display:flex;flex:1;flex-direction:column;gap:9px;padding:22px 22px 20px;border-radius:var(--r);background:var(--forest-900);color:var(--white);overflow:hidden;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s;}
 .acard .aring{position:absolute;right:-42px;top:-52px;width:150px;height:150px;opacity:.17;pointer-events:none;}
 .acard .atag{position:relative;font-family:var(--ui);font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--canopy);}
 .acard h3{position:relative;font-size:1.3rem;color:var(--white);}
@@ -351,18 +352,18 @@ const CONFIG = {
    ========================================================= */
 const ANCHORS = [
   {
-    tag:"Guidebook",
-    title:"AI Usage Guidebook",
-    note:"Rules of the road for every GDS employee using AI, plus the questions to ask yourself before you use it.",
-    url:"https://docs.google.com/document/d/1JRsliGhZBPXB2aZjYkj-2pYAlugo50DRT3NjCAyjfwE/preview",
-    cta:"Read the guidebook"
-  },
-  {
     tag:"Philosophy",
     title:"AI Philosophy and Approach",
     note:"Where GDS stands on AI and why, and how AI Foundations, AI Fluency, and AI & Humanity shape the program.",
     url:"https://docs.google.com/document/d/1Q1twDe2by6SughpboalqgOeyOOHKVahpRGUI_WPaDVI/preview",
     cta:"Read the statement"
+  },
+  {
+    tag:"Guidebook",
+    title:"AI Usage Guidebook",
+    note:"Rules of the road for every GDS employee using AI, plus the questions to ask yourself before you use it.",
+    url:"https://docs.google.com/document/d/1JRsliGhZBPXB2aZjYkj-2pYAlugo50DRT3NjCAyjfwE/preview",
+    cta:"Read the guidebook"
   },
   {
     tag:"Policy",
